@@ -1,7 +1,6 @@
 export default {
   collectCoverage: true,
   coverageDirectory: 'coverage',
-  coverageProvider: 'v8',
   coverageThreshold: {
     global: {
       branches: 100,
@@ -10,7 +9,7 @@ export default {
       statements: 100,
     },
   },
-  maxWorkers: '90%',
+  maxWorkers: 1,
   moduleFileExtensions: ['js', 'ts'],
   preset: 'ts-jest',
   slowTestThreshold: 1,
