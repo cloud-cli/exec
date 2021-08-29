@@ -11,10 +11,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cloud-cli/exec.git"
+    "url": "https://github.com/cloud-cli/exec.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "keywords": [
-    "cloud-cli"
+    "cloudy"
   ],
   "author": "Darlan Alves <me@darlanalv.es>",
   "license": "MIT",

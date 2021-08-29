@@ -23,6 +23,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Semantic Release
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:
