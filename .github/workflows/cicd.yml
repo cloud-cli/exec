@@ -4,32 +4,8 @@ on:
     branches:
       - master
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install dependencies and build library
-        run: npm ci && npm run build && npm run test
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: dist/
-
   release:
-    needs: build
-    runs-on: ubuntu-latest
-    name: Semantic Release
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
-        with:
-          name: dist
-      - uses: cycjimmy/semantic-release-action@v2.5.0
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    uses: homebots/workflows/.github/workflows/node-build-release.yml@master
+    secrets:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
