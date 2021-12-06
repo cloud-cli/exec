@@ -10,9 +10,7 @@ export interface ExecOutput {
   error?: Error;
 }
 
-export interface ExecOptions {
-  shell?: boolean;
-}
+export type ExecOptions = Parameters<typeof spawn>[2];
 
 export class Process extends EventEmitter {
   code: number = 0;
@@ -66,13 +64,9 @@ export class Process extends EventEmitter {
 }
 
 export async function exec(command: string, args: string[] = [], options?: ExecOptions): Promise<ExecOutput> {
-  const spawnOptions = {
-    shell: options?.shell ?? false,
-  };
-
   return new Promise((resolve, reject) => {
     try {
-      const childProcess = spawn(command, args, spawnOptions);
+      const childProcess = spawn(command, args, options);
       const state = new Process(childProcess);
 
       state.on('done', () => resolve(state.output));

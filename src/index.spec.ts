@@ -19,6 +19,18 @@ describe('exec', () => {
     });
   });
 
+  it('should execute a command with additional options', async () => {
+    const result = await exec('env', [], { env: { FOO: '123' } });
+
+    expect(result).toEqual({
+      code: 0,
+      ok: true,
+      stdout: expect.stringContaining('FOO=123'),
+      stderr: '',
+      error: undefined,
+    });
+  });
+
   it('should capture error output from a command', async () => {
     const result = await exec('ls', ['/invalid/path']);
 

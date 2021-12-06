@@ -1,6 +1,13 @@
 export default {
+  cache: true,
+  clearMocks: true,
   collectCoverage: true,
   coverageDirectory: 'coverage',
+  maxWorkers: 1,
+  preset: 'ts-jest',
+  transform: {},
+  extensionsToTreatAsEsm: ['.ts'],
+  slowTestThreshold: 1,
   coverageThreshold: {
     global: {
       branches: 100,
@@ -9,10 +16,4 @@ export default {
       statements: 100,
     },
   },
-  maxWorkers: 1,
-  moduleFileExtensions: ['js', 'ts'],
-  preset: 'ts-jest',
-  slowTestThreshold: 1,
-  testEnvironment: 'jest-environment-node',
-  testMatch: ['**/src/*.spec.ts'],
 };
