@@ -1,0 +1,5 @@
+.github/
+jest.*
+tsconfig.json
+dist/*.spec.js
+dist/*.spec.d.ts
