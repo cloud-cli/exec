@@ -4,6 +4,7 @@
   "description": "Promise wrapper for child_process.spawn",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "type": "module",
   "prettier": "@cloud-cli/prettier-config",
   "scripts": {
     "build": "tsc",
