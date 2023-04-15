@@ -2,8 +2,6 @@ import { EventEmitter } from 'events';
 import { spawn } from 'child_process';
 import { StringDecoder } from 'string_decoder';
 
-
-
 export interface ExecOutput {
   ok: boolean;
   code: number;
@@ -68,6 +66,7 @@ export class Process extends EventEmitter {
 export async function exec(command: string, args: string[] = [], options?: ExecOptions): Promise<ExecOutput> {
   return new Promise((resolve, reject) => {
     try {
+      /* istanbul ignore next */
       process.env.DEBUG && console.log(command, args, options);
       const childProcess = spawn(command, args, options);
       const state = new Process(childProcess);
