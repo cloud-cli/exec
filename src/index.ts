@@ -1,5 +1,5 @@
 import { EventEmitter } from 'events';
-import { spawn } from 'child_process';
+import { spawn, exec as sh } from 'child_process';
 import { StringDecoder } from 'string_decoder';
 
 export interface ExecOutput {
@@ -11,6 +11,7 @@ export interface ExecOutput {
 }
 
 export type ExecOptions = Parameters<typeof spawn>[2];
+export type ShOptions = Parameters<typeof sh>[2];
 
 export class Process extends EventEmitter {
   code: number = 0;
@@ -63,12 +64,22 @@ export class Process extends EventEmitter {
   }
 }
 
+export async function execString(command: string, options?: ShOptions): Promise<ExecOutput> {
+  /* istanbul ignore next */
+  process.env.DEBUG && console.log(command, options);
+  return execInternal(() => sh(command, options));
+}
+
 export async function exec(command: string, args: string[] = [], options?: ExecOptions): Promise<ExecOutput> {
+  /* istanbul ignore next */
+  process.env.DEBUG && console.log(command, args, options);
+  return execInternal(() => spawn(command, args, options));
+}
+
+function execInternal(runner: any) {
   return new Promise((resolve, reject) => {
     try {
-      /* istanbul ignore next */
-      process.env.DEBUG && console.log(command, args, options);
-      const childProcess = spawn(command, args, options);
+      const childProcess = runner();
       const state = new Process(childProcess);
 
       state.on('done', () => resolve(state.output));
