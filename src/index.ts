@@ -76,7 +76,7 @@ export async function exec(command: string, args: string[] = [], options?: ExecO
   return execInternal(() => spawn(command, args, options));
 }
 
-function execInternal(runner: any) {
+function execInternal(runner: any): Promise<any> {
   return new Promise((resolve, reject) => {
     try {
       const childProcess = runner();
