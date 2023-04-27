@@ -1,5 +1,5 @@
 import { spawn } from 'child_process';
-import { exec, Process } from './index';
+import { exec, execString, Process } from './index';
 
 describe('exec', () => {
   it('should throw an error for invalid inputs', async () => {
@@ -56,6 +56,21 @@ describe('exec', () => {
     });
 
     expect(result.error.message).toEqual('');
+  });
+});
+
+describe('execString', () => {
+  it('should run a command as string', () => {
+    const date = new Date().toISOString().slice(0, 10);
+    const result = await execString('date -u +"%Y-%m-%d"');
+
+    expect(result).toEqual({
+      code: 0,
+      ok: true,
+      stdout: expect.stringContaining(date),
+      stderr: '',
+      error: undefined,
+    });
   });
 });
 
