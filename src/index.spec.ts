@@ -60,7 +60,7 @@ describe('exec', () => {
 });
 
 describe('execString', () => {
-  it('should run a command as string', () => {
+  it('should run a command as string', async () => {
     const date = new Date().toISOString().slice(0, 10);
     const result = await execString('date -u +"%Y-%m-%d"');
 
