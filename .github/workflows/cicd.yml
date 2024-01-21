@@ -1,8 +1,7 @@
 name: CICD
 on:
   push:
-    branches:
-      - master
+
 jobs:
   release:
     uses: homebots/workflows/.github/workflows/node-build-release.yml@master
