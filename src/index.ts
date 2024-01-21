@@ -19,7 +19,7 @@ export class Process extends EventEmitter {
   error: Error;
 
   get hasError() {
-    return Boolean(this._errorBuffer.length || this.code !== 0 || this.error);
+    return Boolean((this._errorBuffer.length && this.code !== 0) || this.code !== 0 || this.error);
   }
 
   constructor(protected childProcess: ReturnType<typeof spawn>) {
